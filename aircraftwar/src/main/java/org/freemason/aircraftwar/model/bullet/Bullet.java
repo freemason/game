@@ -1,9 +1,15 @@
 package org.freemason.aircraftwar.model.bullet;
 
+import org.freemason.aircraftwar.container.Container;
 import org.freemason.aircraftwar.model.FlyingObject;
-import org.freemason.aircraftwar.model.Plane;
+import org.freemason.aircraftwar.model.bullet.factory.BulletFactory;
+import org.freemason.aircraftwar.model.element.Element;
+import org.freemason.aircraftwar.model.plane.Plane;
+import org.freemason.aircraftwar.utils.MaterialUtils;
 
-public abstract class Bullet extends FlyingObject {
+import java.awt.image.BufferedImage;
+
+public abstract class Bullet extends Element implements FlyingObject {
     //子弹伤害值
     private final int damage;
     //飞行速度
@@ -12,7 +18,8 @@ public abstract class Bullet extends FlyingObject {
     private final boolean direction;
 
     //子弹 方向为true 向上飞 即为座机子弹   反之为敌机子弹
-    protected Bullet(int damage, int speed, boolean direction) {
+    protected Bullet(int X, int Y, int damage, int speed, boolean direction) {
+        super(X, Y, MaterialUtils.getBulletImage());
         this.damage = damage;
         this.speed = speed;
         this.direction = direction;
@@ -30,9 +37,19 @@ public abstract class Bullet extends FlyingObject {
         return direction;
     }
 
+    public final void fly(){
+        if (direction){
+            setY(getY() + getSpeed());
+        }else {
+            setY(getY() - getSpeed());
+        }
+    }
+
+    //子弹击中飞机
     public void hit(Plane plane){
-        //逻辑判断
+        //碰撞判断
         plane.shot(this);
+        container.drop(this);
     }
 
 }

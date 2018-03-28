@@ -1,0 +1,13 @@
+[
+  {
+    "fighterName":"F14",
+    "damage":20,
+    "health":100,
+    "interval":100,
+    "speed":10,
+    "launchSpeed":20
+  }
+]
+
+//speed       移动速度  10px/50ms
+//launchSpeed 子弹速度  2px/10ms
