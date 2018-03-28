@@ -59,8 +59,5 @@ public abstract class Element {
         return image;
     }
 
-    public abstract void outOfBounds();
-
-
 
 }

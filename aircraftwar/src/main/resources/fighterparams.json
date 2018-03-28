@@ -5,9 +5,19 @@
     "health":100,
     "interval":100,
     "speed":10,
-    "launchSpeed":20
+    "bulletSpeed":10
+  },
+
+  {
+    "fighterName":"F22",
+    "damage":25,
+    "health":120,
+    "interval":90,
+    "speed":13,
+    "bulletSpeed":20
   }
 ]
 
-//speed       移动速度  10px/50ms
-//launchSpeed 子弹速度  2px/10ms
+//speed       移动速度  5px/50ms
+//launchSpeed 子弹速度  10px/50ms
+//interval    射击间隔  次/100ms

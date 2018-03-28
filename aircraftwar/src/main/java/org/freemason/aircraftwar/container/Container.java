@@ -12,6 +12,9 @@ public abstract class Container {
 
     private List<Element> elementList = new LinkedList<Element>();
 
+    private
+
+
     protected Container(int height, int width) {
         this.height = height;
         this.width = width;

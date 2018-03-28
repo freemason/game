@@ -13,7 +13,7 @@ public abstract class Bullet extends Element implements FlyingObject {
     //子弹伤害值
     private final int damage;
     //飞行速度
-    private final int speed;
+    protected final int speed;  //    2px/ms
     //飞行方向
     private final boolean direction;
 
@@ -29,27 +29,37 @@ public abstract class Bullet extends Element implements FlyingObject {
         return damage;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public boolean isDirection() {
-        return direction;
-    }
-
-    public final void fly(){
+    public final void move(){
         if (direction){
-            setY(getY() + getSpeed());
+            setY(getY() + speed);
         }else {
-            setY(getY() - getSpeed());
+            setY(getY() - speed);
+        }
+
+        if (checkOutOfBounds()){
+            destory();
         }
     }
 
     //子弹击中飞机
     public void hit(Plane plane){
         //碰撞判断
+
         plane.shot(this);
+        destory();
+    }
+
+    private boolean checkOutOfBounds(){
+        if (direction){
+            return getY() > container.getHeight();
+        }else{
+            return getY() < 0;
+        }
+    }
+
+    private void destory(){
         container.drop(this);
+        this.container = null;
     }
 
 }
