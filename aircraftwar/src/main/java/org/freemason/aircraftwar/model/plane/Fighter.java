@@ -1,15 +1,15 @@
 package org.freemason.aircraftwar.model.plane;
 
-import org.freemason.aircraftwar.container.Container;
 import org.freemason.aircraftwar.model.bullet.Bullet;
+import org.freemason.aircraftwar.utils.MaterialUtils;
 
 import java.awt.image.BufferedImage;
 
 public class Fighter extends Plane{
 
 
-    protected Fighter(int X, int Y, BufferedImage image, int health) {
-        super(X, Y, image, health);
+    public Fighter(int X, int Y, String fighterName, int health) {
+        super(X, Y, MaterialUtils.getPlaneImage(fighterName), health);
     }
 
     Bullet fire() {
@@ -25,6 +25,10 @@ public class Fighter extends Plane{
     }
 
     public void outOfBounds() {
+
+    }
+
+    public void move() {
 
     }
 }

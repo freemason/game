@@ -13,7 +13,7 @@ public class Enemy extends Plane{
         return null;
     }
 
-    void dead() {
+    public void dead() {
 
     }
 
