@@ -21,7 +21,8 @@ public class MaterialUtils {
         File[] files = new File(url.getFile()).listFiles();
         for (File file : files) {
             try {
-                airplaneImages.put(file.getName(), ImageIO.read(file));
+                String fileName = file.getName();
+                airplaneImages.put(fileName.substring(0, fileName.lastIndexOf(".")), ImageIO.read(file));
             } catch (IOException e) {
                 continue;
                 //file has been checked,ignore IOException
