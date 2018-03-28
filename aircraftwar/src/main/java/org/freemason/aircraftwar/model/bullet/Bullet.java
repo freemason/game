@@ -58,7 +58,6 @@ public abstract class Bullet extends Element implements FlyingObject {
     }
 
     private void destory(){
-        container.drop(this);
         this.container = null;
     }
 

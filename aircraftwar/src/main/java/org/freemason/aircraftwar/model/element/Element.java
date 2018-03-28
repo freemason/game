@@ -28,7 +28,6 @@ public abstract class Element {
         this.container = Game.container;
         this.height = image.getHeight();
         this.width = image.getWidth();
-        container.join(this);
     }
 
     public int getX() {

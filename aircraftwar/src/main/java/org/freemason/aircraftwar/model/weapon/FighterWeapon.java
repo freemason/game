@@ -11,6 +11,6 @@ public class FighterWeapon extends Weapon{
     }
 
     public Bullet produce() {
-      return new FighterBullet(plane.getX(), plane.getY(), getDamage(), getSpeed());
+        return null;
     }
 }

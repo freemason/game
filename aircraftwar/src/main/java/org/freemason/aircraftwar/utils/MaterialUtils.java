@@ -11,9 +11,10 @@ public class MaterialUtils {
 
     private static Map<String, BufferedImage> airplaneImages = new HashMap<String, BufferedImage>();
     private static BufferedImage bulletImage;
-
+    private static BufferedImage backgroundImage;
     private static final String DEFAULT_PLANE_MATERIAL_PATH = "material/fighter";
     private static final String DEFAULT_BULLET_MATERIAL_PATH = "material/bullet/bullet.png";
+    private static final String DEFAULT_BACKGROUND_MATERIAL_PATH = "material/background.png";
 
     static {
         URL url = MaterialUtils.class.getClassLoader().getResource(DEFAULT_PLANE_MATERIAL_PATH);
@@ -33,6 +34,14 @@ public class MaterialUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        url = MaterialUtils.class.getClassLoader().getResource(DEFAULT_BACKGROUND_MATERIAL_PATH);
+        try {
+            backgroundImage = ImageIO.read(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static BufferedImage getPlaneImage(String planeName){
@@ -45,5 +54,9 @@ public class MaterialUtils {
 
     public static BufferedImage getBulletImage() {
         return bulletImage;
+    }
+
+    public static BufferedImage getBackgroundImage() {
+        return backgroundImage;
     }
 }

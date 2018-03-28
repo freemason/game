@@ -49,7 +49,4 @@ public abstract class Container {
         return width;
     }
 
-    public List<Element> getElementList() {
-        return elementList;
-    }
 }
