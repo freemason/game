@@ -13,4 +13,8 @@ public class EnemyBullet extends Bullet{
     public void outOfBounds() {
 
     }
+
+    public void move(int direction) {
+
+    }
 }

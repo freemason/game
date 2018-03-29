@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 
 public abstract class Element {
     //所处容器
-    protected Container container;
 
     //横纵坐标位置
     private int X;
@@ -25,7 +24,6 @@ public abstract class Element {
         this.X = X;
         this.Y = Y;
         this.image = image;
-        this.container = Game.container;
         this.height = image.getHeight();
         this.width = image.getWidth();
     }

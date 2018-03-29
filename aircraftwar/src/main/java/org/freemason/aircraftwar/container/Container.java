@@ -23,7 +23,7 @@ public class Container extends JPanel{
     private Fighter fighter;
 
     public Container(int height, int width, String fighterName) {
-        fighter = new Fighter(0,0,fighterName,100);
+        fighter = new Fighter(0,0,fighterName,100,20);
         this.height = height;
         this.width = width;
 

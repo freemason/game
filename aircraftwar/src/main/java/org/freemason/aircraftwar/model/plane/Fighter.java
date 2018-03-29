@@ -7,9 +7,8 @@ import java.awt.image.BufferedImage;
 
 public class Fighter extends Plane{
 
-
-    public Fighter(int X, int Y, String fighterName, int health) {
-        super(X, Y, MaterialUtils.getPlaneImage(fighterName), health);
+    public Fighter(int X, int Y, String fighterName, int health, int speed) {
+        super(X, Y, MaterialUtils.getPlaneImage(fighterName), health, speed);
     }
 
     Bullet fire() {
@@ -28,7 +27,4 @@ public class Fighter extends Plane{
 
     }
 
-    public void move() {
-
-    }
 }

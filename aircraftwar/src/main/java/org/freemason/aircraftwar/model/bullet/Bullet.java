@@ -50,15 +50,16 @@ public abstract class Bullet extends Element implements FlyingObject {
     }
 
     private boolean checkOutOfBounds(){
-        if (direction){
+        /*if (direction){
             return getY() > container.getHeight();
         }else{
             return getY() < 0;
-        }
+        }*/
+        return false;
     }
 
     private void destory(){
-        this.container = null;
+
     }
 
 }

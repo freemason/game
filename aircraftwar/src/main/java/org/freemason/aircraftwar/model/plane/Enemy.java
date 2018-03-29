@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class Enemy extends Plane{
     protected Enemy(int X, int Y, BufferedImage image, int health) {
-        super(X, Y, image, health);
+        super(X, Y, image, health,10);
     }
 
     Bullet fire() {
@@ -17,7 +17,5 @@ public class Enemy extends Plane{
 
     }
 
-    public void move() {
 
-    }
 }
