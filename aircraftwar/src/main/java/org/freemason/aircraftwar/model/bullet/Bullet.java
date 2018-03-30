@@ -1,7 +1,7 @@
 package org.freemason.aircraftwar.model.bullet;
 
 import org.freemason.aircraftwar.container.Container;
-import org.freemason.aircraftwar.model.FlyingObject;
+import org.freemason.aircraftwar.model.Moveable;
 import org.freemason.aircraftwar.model.bullet.factory.BulletFactory;
 import org.freemason.aircraftwar.model.element.Element;
 import org.freemason.aircraftwar.model.plane.Plane;
@@ -9,7 +9,7 @@ import org.freemason.aircraftwar.utils.MaterialUtils;
 
 import java.awt.image.BufferedImage;
 
-public abstract class Bullet extends Element implements FlyingObject {
+public abstract class Bullet extends Element implements Moveable {
     //子弹伤害值
     private final int damage;
     //飞行速度

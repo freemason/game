@@ -1,5 +1,6 @@
 package org.freemason.aircraftwar.listener;
 
+import javafx.scene.input.KeyCode;
 import org.freemason.aircraftwar.ContextHolder;
 import org.freemason.aircraftwar.container.Temp;
 import org.freemason.aircraftwar.model.plane.Fighter;
@@ -30,24 +31,31 @@ public class WASDListener extends KeyAdapter {
     }
 
     public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
+       /* int keyCode = e.getKeyCode();
         if (keyCode != 87 &&keyCode != 83&&keyCode != 65&&keyCode != 68){
             return;
-        }
-
+        }*/
         updateKeyState(e.getKeyCode(), true);
-        ContextHolder.setFighterDirection(getPressedKey());
+
+
         fighterDirection = getPressedKey();
+        //ContextHolder.setFighterDirection(getPressedKey());
 
+       // System.out.println(fighterDirection);
         f.move(fighterDirection);
-
+        t.repaint();
+        System.out.println(this.hashCode());
     }
 
     public void keyReleased(KeyEvent e) {
         updateKeyState(e.getKeyCode(), false);
-        ContextHolder.setFighterDirection(getPressedKey());
         fighterDirection = getPressedKey();
 
+
+        //ContextHolder.setFighterDirection(getPressedKey());
+        /*fighterDirection = getPressedKey();
+        System.out.println(getPressedKey());*/
+       // t.repaint();
     }
 
     private void updateKeyState(int keyCode, boolean down) {
@@ -64,23 +72,14 @@ public class WASDListener extends KeyAdapter {
             case 68:
                 DDOWN = down;
                 break;
+            default:
+                break;
         }
     }
 
 
     private int getPressedKey() {
-        int r = 0;
-        //按住上下  和  左右其中一个
-        if (WDOWN && SDOWN) {
-            if (ADOWN && !DDOWN) {
-                return 65;
-            }
-            if (!ADOWN && DDOWN) {
-                return 68;
-            }
-            return r;
-        }
-        //按住左右  和  上下其中一个
+        //同时按住左右时   如果再按下  上或者下
         if (ADOWN && DDOWN) {
             if (WDOWN) {
                 return 87;
@@ -88,27 +87,39 @@ public class WASDListener extends KeyAdapter {
             if (SDOWN) {
                 return 83;
             }
-            return r;
-        }
-        r = 1;
-        if (WDOWN) {
-            r *= 87;
-        }
-        if (ADOWN) {
-            r *= 65;
-        }
-        if (SDOWN) {
-            r *= 83;
-        }
-        if (DDOWN) {
-            r *= 68;
+            else {
+                return 0;
+            }
         }
 
-        if (!WDOWN && !ADOWN && !SDOWN && !DDOWN) {
-            //全部未按下
-            return 0;
+        if(WDOWN && ADOWN){
+            return 5655;
         }
-        return r;
+        if(WDOWN && DDOWN){
+            return 5916;
+        }
+        if(SDOWN && ADOWN){
+            return 5395;
+        }
+        if(SDOWN && DDOWN){
+            return 5644;
+        }
+
+        if (WDOWN) {
+            return 87;
+        }
+        if (ADOWN) {
+            return 65;
+        }
+        if (SDOWN) {
+            return 83;
+        }
+        if (DDOWN) {
+            return 68;
+        }
+
+
+        return 0;
     }
 
    /* private void draw() {

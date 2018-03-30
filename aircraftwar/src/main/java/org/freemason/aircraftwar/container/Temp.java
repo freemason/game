@@ -19,6 +19,8 @@ public class Temp extends JPanel {
 /*Random r = new Random();*/
 
 
+
+
     @Override
     public void paint(Graphics g) {
         g.drawImage(MaterialUtils.getBackgroundImage(), 0, 0, null); // 画背景图
@@ -28,9 +30,11 @@ public class Temp extends JPanel {
     /** 画英雄机 */
     public void paintHero(Graphics g) {
         Fighter f = ContextHolder.getBean(Fighter.class);
-        long st = System.currentTimeMillis();
         g.drawImage(f.getImage(), f.getX(), f.getY(), null);
-        System.out.println(System.currentTimeMillis() -st);
     }
 
+    @Override
+    public void repaint() {
+        super.repaint();
+    }
 }

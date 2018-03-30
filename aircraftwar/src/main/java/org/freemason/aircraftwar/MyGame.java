@@ -40,7 +40,7 @@ public class MyGame{
 
 class MyDrawPanel extends JPanel{
 
-    int x=200, y=150,speed = 10;
+    int x=200, y=150,speed = 3;
 
     private double degree;
 
@@ -102,7 +102,7 @@ class MyDrawPanel extends JPanel{
 
                 try {
 
-                    Thread.sleep(100);
+                    Thread.sleep(5);
 
                 } catch (InterruptedException e) {
 

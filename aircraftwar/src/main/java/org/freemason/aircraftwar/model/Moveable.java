@@ -1,5 +1,5 @@
 package org.freemason.aircraftwar.model;
 
-public interface FlyingObject{
+public interface Moveable{
     void move(int direction);
 }

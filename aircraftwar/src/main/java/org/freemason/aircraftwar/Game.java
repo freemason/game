@@ -25,7 +25,7 @@ private static int i = 0;
     /*for (int i = 0; i < bufferedImages.size(); i++){
         executorService.execute(new DrawTask(g,bufferedImages.get(i),616/bufferedImages.size()*i,839/bufferedImages.size()*i));
     }*/
-    private static Fighter fighter = new Fighter(300,400,"F22",200,5);
+    private static Fighter fighter = new Fighter(300,400,"F22",200,3);
     static {
         ContextHolder.registBean(fighter);
         ContextHolder.registBean(executorService);
@@ -44,26 +44,20 @@ private static int i = 0;
 
     public static void main(String[] args) {
         //新建一个java框框
-        JFrame frame = new JFrame("fighter"){
-            @Override
-            public void paint(Graphics g) {
-                Fighter f = ContextHolder.getBean(Fighter.class);
-                long st = System.currentTimeMillis();
-                g.drawImage(f.getImage(), f.getX(), f.getY(), null);
-                System.out.println(System.currentTimeMillis() -st);
-            }
-        };
+        JFrame frame = new JFrame("fighter");
 
-        //Temp t = new Temp();
-       // t.addKeyListener(new WASDListener());
-       // ContextHolder.registBean(t);
+        Temp t = new Temp();
 
-       // frame.add(t); // 将面板添加到JFrame中
+        /*t.addKeyListener(new WASDListener());
+        t.addKeyListener(new WASDListener());*/
+       ContextHolder.registBean(t);
+       frame.add(t); // 将面板添加到JFrame中
         frame.setSize(616, 839); // 设置大小
         //frame.setAlwaysOnTop(true); // 设置其总在最上
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 默认关闭操作
         frame.setLocationRelativeTo(null); // 设置窗体初始位置
         frame.setVisible(true); // 尽快调用paint
+        //frame.addKeyListener(new WASDListener());
         frame.addKeyListener(new WASDListener());
     }
 

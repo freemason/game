@@ -1,7 +1,7 @@
 package org.freemason.aircraftwar.model.plane;
 
 import org.freemason.aircraftwar.container.Container;
-import org.freemason.aircraftwar.model.FlyingObject;
+import org.freemason.aircraftwar.model.Moveable;
 import org.freemason.aircraftwar.model.bullet.Bullet;
 import org.freemason.aircraftwar.model.element.Element;
 import org.freemason.aircraftwar.model.weapon.FighterWeapon;
@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Plane extends Element implements FlyingObject {
+public abstract class Plane extends Element implements Moveable {
     private final int speed;
 
     private int health;
@@ -62,7 +62,7 @@ public abstract class Plane extends Element implements FlyingObject {
                 setY(getY() - getSpeed());
                 setX(getX() + getSpeed());
                 break;
-            case 5495:
+            case 5395:
                 setY(getY() + getSpeed());
                 setX(getX() - getSpeed());
                 break;
