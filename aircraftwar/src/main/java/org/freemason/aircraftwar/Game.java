@@ -25,7 +25,7 @@ private static int i = 0;
     /*for (int i = 0; i < bufferedImages.size(); i++){
         executorService.execute(new DrawTask(g,bufferedImages.get(i),616/bufferedImages.size()*i,839/bufferedImages.size()*i));
     }*/
-    private static Fighter fighter = new Fighter(300,400,"F22",200,3);
+    private static Fighter fighter = new Fighter(300,400,"T50",200,1);
     static {
         ContextHolder.registBean(fighter);
         ContextHolder.registBean(executorService);

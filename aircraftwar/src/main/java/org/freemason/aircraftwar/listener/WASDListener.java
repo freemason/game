@@ -1,62 +1,102 @@
 package org.freemason.aircraftwar.listener;
 
-import javafx.scene.input.KeyCode;
 import org.freemason.aircraftwar.ContextHolder;
 import org.freemason.aircraftwar.container.Temp;
 import org.freemason.aircraftwar.model.plane.Fighter;
-import org.freemason.aircraftwar.utils.MaterialUtils;
 
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ *
+ */
 public class WASDListener extends KeyAdapter {
-    private AtomicBoolean drawing = new AtomicBoolean(false);
 
     private Temp t = ContextHolder.getBean(Temp.class);
     private Fighter f = ContextHolder.getBean(Fighter.class);
-    private Graphics graphics = MaterialUtils.getBackgroundImage().getGraphics();
     private ExecutorService executorService = ContextHolder.getBean(ExecutorService.class);
 
     private static volatile int fighterDirection = 0;
-
+    private static AtomicBoolean flying = new AtomicBoolean(false);
     private boolean WDOWN = false;
     private boolean ADOWN = false;
     private boolean SDOWN = false;
     private boolean DDOWN = false;
 
-    public void keyTyped(KeyEvent e) {
-    }
-
     public void keyPressed(KeyEvent e) {
-       /* int keyCode = e.getKeyCode();
-        if (keyCode != 87 &&keyCode != 83&&keyCode != 65&&keyCode != 68){
+
+        //如果不是W A S D键 不做任何操作
+        //----------------------
+        int keyCode = e.getKeyCode();
+        if (keyCode != 87 && keyCode != 83 && keyCode != 65 && keyCode != 68) {
             return;
-        }*/
+        }
+        //-------------------------
+        //更新键位状态 按下的键位状态
+        //-------------------------
         updateKeyState(e.getKeyCode(), true);
+        //-------------------------
+        modifyDirectionByPressedKey();
 
+        if (flying.get()) {
+            return;
+        }
 
-        fighterDirection = getPressedKey();
+        //飞行动作交给线程池异步执行
+        executorService.execute(new Runnable() {
+            public void run() {
+                fly();
+            }
+        });
+
         //ContextHolder.setFighterDirection(getPressedKey());
-
-       // System.out.println(fighterDirection);
-        f.move(fighterDirection);
-        t.repaint();
-        System.out.println(this.hashCode());
+        // System.out.println(fighterDirection);
     }
 
     public void keyReleased(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        if (keyCode != 87 && keyCode != 83 && keyCode != 65 && keyCode != 68) {
+            return;
+        }
+
         updateKeyState(e.getKeyCode(), false);
-        fighterDirection = getPressedKey();
+        modifyDirectionByPressedKey();
 
 
-        //ContextHolder.setFighterDirection(getPressedKey());
-        /*fighterDirection = getPressedKey();
-        System.out.println(getPressedKey());*/
-       // t.repaint();
+        if (flying.get()) {
+            return;
+        }
+
+        //飞行动作交给线程池异步执行
+        executorService.execute(new Runnable() {
+            public void run() {
+                fly();
+            }
+        });
+
     }
+
+    private void modifyDirectionByPressedKey() {
+        fighterDirection = getPressedKey();
+    }
+
+
+    private void fly() {
+        while (fighterDirection > 0) {
+            flying.set(true);
+            f.move(fighterDirection);
+            t.repaint();
+            try {
+                Thread.sleep(4);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        flying.set(false);
+    }
+
 
     private void updateKeyState(int keyCode, boolean down) {
         switch (keyCode) {
@@ -81,27 +121,29 @@ public class WASDListener extends KeyAdapter {
     private int getPressedKey() {
         //同时按住左右时   如果再按下  上或者下
         if (ADOWN && DDOWN) {
-            if (WDOWN) {
-                return 87;
-            }
-            if (SDOWN) {
-                return 83;
-            }
-            else {
+
+            if (WDOWN || SDOWN) {
+                if (WDOWN && !SDOWN) {
+                    return 87;
+                }
+                if (!WDOWN) {
+                    return 83;
+                }
+            } else {
                 return 0;
             }
         }
 
-        if(WDOWN && ADOWN){
+        if (WDOWN && ADOWN) {
             return 5655;
         }
-        if(WDOWN && DDOWN){
+        if (WDOWN && DDOWN) {
             return 5916;
         }
-        if(SDOWN && ADOWN){
+        if (SDOWN && ADOWN) {
             return 5395;
         }
-        if(SDOWN && DDOWN){
+        if (SDOWN && DDOWN) {
             return 5644;
         }
 
@@ -117,8 +159,6 @@ public class WASDListener extends KeyAdapter {
         if (DDOWN) {
             return 68;
         }
-
-
         return 0;
     }
 

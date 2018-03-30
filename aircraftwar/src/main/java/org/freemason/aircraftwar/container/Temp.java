@@ -33,8 +33,4 @@ public class Temp extends JPanel {
         g.drawImage(f.getImage(), f.getX(), f.getY(), null);
     }
 
-    @Override
-    public void repaint() {
-        super.repaint();
-    }
 }
