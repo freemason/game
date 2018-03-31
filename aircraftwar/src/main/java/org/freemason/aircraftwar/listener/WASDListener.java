@@ -1,7 +1,7 @@
 package org.freemason.aircraftwar.listener;
 
 import org.freemason.aircraftwar.ContextHolder;
-import org.freemason.aircraftwar.container.Temp;
+import org.freemason.aircraftwar.container.JPanelElementContainer;
 import org.freemason.aircraftwar.model.plane.Fighter;
 
 import java.awt.event.KeyAdapter;
@@ -14,16 +14,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class WASDListener extends KeyAdapter {
 
-    private Temp t = ContextHolder.getBean(Temp.class);
+    private JPanelElementContainer jPanelElementContainer = ContextHolder.getBean(JPanelElementContainer.class);
     private Fighter f = ContextHolder.getBean(Fighter.class);
     private ExecutorService executorService = ContextHolder.getBean(ExecutorService.class);
 
     private static volatile int fighterDirection = 0;
     private static AtomicBoolean flying = new AtomicBoolean(false);
-    private boolean WDOWN = false;
-    private boolean ADOWN = false;
-    private boolean SDOWN = false;
-    private boolean DDOWN = false;
+    private boolean UPPRESSED = false;
+    private boolean LEFTPRESSED = false;
+    private boolean DOWNPRESSED = false;
+    private boolean RIGHTPRESSED = false;
 
     public void keyPressed(KeyEvent e) {
 
@@ -45,11 +45,7 @@ public class WASDListener extends KeyAdapter {
         }
 
         //飞行动作交给线程池异步执行
-        executorService.execute(new Runnable() {
-            public void run() {
-                fly();
-            }
-        });
+        executorService.execute(()->fly());
 
         //ContextHolder.setFighterDirection(getPressedKey());
         // System.out.println(fighterDirection);
@@ -64,18 +60,12 @@ public class WASDListener extends KeyAdapter {
         updateKeyState(e.getKeyCode(), false);
         modifyDirectionByPressedKey();
 
-
         if (flying.get()) {
             return;
         }
 
         //飞行动作交给线程池异步执行
-        executorService.execute(new Runnable() {
-            public void run() {
-                fly();
-            }
-        });
-
+        executorService.execute(()->fly());
     }
 
     private void modifyDirectionByPressedKey() {
@@ -87,7 +77,7 @@ public class WASDListener extends KeyAdapter {
         while (fighterDirection > 0) {
             flying.set(true);
             f.move(fighterDirection);
-            t.repaint();
+            jPanelElementContainer.repaint();
             try {
                 Thread.sleep(4);
             } catch (InterruptedException e) {
@@ -101,16 +91,16 @@ public class WASDListener extends KeyAdapter {
     private void updateKeyState(int keyCode, boolean down) {
         switch (keyCode) {
             case 87:
-                WDOWN = down;
+                UPPRESSED = down;
                 break;
             case 83:
-                SDOWN = down;
+                DOWNPRESSED = down;
                 break;
             case 65:
-                ADOWN = down;
+                LEFTPRESSED = down;
                 break;
             case 68:
-                DDOWN = down;
+                RIGHTPRESSED = down;
                 break;
             default:
                 break;
@@ -120,13 +110,12 @@ public class WASDListener extends KeyAdapter {
 
     private int getPressedKey() {
         //同时按住左右时   如果再按下  上或者下
-        if (ADOWN && DDOWN) {
-
-            if (WDOWN || SDOWN) {
-                if (WDOWN && !SDOWN) {
+        if (LEFTPRESSED && RIGHTPRESSED) {
+            if (UPPRESSED || DOWNPRESSED) {
+                if (UPPRESSED && !DOWNPRESSED) {
                     return 87;
                 }
-                if (!WDOWN) {
+                if (!UPPRESSED) {
                     return 83;
                 }
             } else {
@@ -134,46 +123,30 @@ public class WASDListener extends KeyAdapter {
             }
         }
 
-        if (WDOWN && ADOWN) {
+        if (UPPRESSED && LEFTPRESSED) {
             return 5655;
         }
-        if (WDOWN && DDOWN) {
+        if (UPPRESSED && RIGHTPRESSED) {
             return 5916;
         }
-        if (SDOWN && ADOWN) {
+        if (DOWNPRESSED && LEFTPRESSED) {
             return 5395;
         }
-        if (SDOWN && DDOWN) {
+        if (DOWNPRESSED && RIGHTPRESSED) {
             return 5644;
         }
-
-        if (WDOWN) {
+        if (UPPRESSED) {
             return 87;
         }
-        if (ADOWN) {
+        if (LEFTPRESSED) {
             return 65;
         }
-        if (SDOWN) {
+        if (DOWNPRESSED) {
             return 83;
         }
-        if (DDOWN) {
+        if (RIGHTPRESSED) {
             return 68;
         }
         return 0;
     }
-
-   /* private void draw() {
-        drawing.set(true);
-        executorService.submit(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                drawing.set(false);
-            }
-        });
-    }*/
-
 }

@@ -3,21 +3,11 @@ package org.freemason.aircraftwar.container;
 import org.freemason.aircraftwar.ContextHolder;
 import org.freemason.aircraftwar.model.plane.Fighter;
 import org.freemason.aircraftwar.utils.MaterialUtils;
-import sun.java2d.SunGraphics2D;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Temp extends JPanel {
-
-    public Temp(){
-    }
-/*Random r = new Random();*/
-
 
 
 

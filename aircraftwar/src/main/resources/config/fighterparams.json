@@ -17,7 +17,3 @@
     "bulletSpeed":20
   }
 ]
-
-//speed       移动速度  5px/50ms
-//launchSpeed 子弹速度  10px/50ms
-//interval    射击间隔  次/100ms

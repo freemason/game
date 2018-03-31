@@ -1,23 +1,31 @@
-package org.freemason.aircraftwar.model.bullet;
+package org.freemason.aircraftwar.model.weapon.bullet;
 
-import org.freemason.aircraftwar.container.Container;
+import org.freemason.aircraftwar.ContextHolder;
 import org.freemason.aircraftwar.model.Moveable;
-import org.freemason.aircraftwar.model.bullet.factory.BulletFactory;
 import org.freemason.aircraftwar.model.element.Element;
 import org.freemason.aircraftwar.model.plane.Plane;
 import org.freemason.aircraftwar.utils.MaterialUtils;
 
-import java.awt.image.BufferedImage;
+import java.util.concurrent.ExecutorService;
 
 public abstract class Bullet extends Element implements Moveable {
+
     //子弹伤害值
     private final int damage;
     //飞行速度
-    protected final int speed;  //    2px/ms
+    private final int speed;
     //飞行方向
     private final boolean direction;
 
-    //子弹 方向为true 向上飞 即为座机子弹   反之为敌机子弹
+    //子弹  可销毁
+    public abstract void destroy();
+
+    @Override
+    public final void outOfBounds() {
+        destroy();
+    }
+
+    //子弹 方向为true 向下飞 即为敌机子弹  反之为座机子弹
     protected Bullet(int X, int Y, int damage, int speed, boolean direction) {
         super(X, Y, MaterialUtils.getBulletImage());
         this.damage = damage;
@@ -29,37 +37,35 @@ public abstract class Bullet extends Element implements Moveable {
         return damage;
     }
 
-    public final void move(){
+    @Override
+    public final void move(int dir){
+
         if (direction){
             setY(getY() + speed);
         }else {
             setY(getY() - speed);
         }
-
         if (checkOutOfBounds()){
-            destory();
+            outOfBounds();
+            destroy();
         }
+        //bullet has only two directions, ignore direction parameter!
     }
 
     //子弹击中飞机
     public void hit(Plane plane){
         //碰撞判断
-
         plane.shot(this);
-        destory();
+        destroy();
     }
 
     private boolean checkOutOfBounds(){
-        /*if (direction){
-            return getY() > container.getHeight();
+        if (direction){
+            return getY() >= container.getHeight();
         }else{
-            return getY() < 0;
-        }*/
-        return false;
+            return getY() + getHeight() < 0;
+        }
     }
 
-    private void destory(){
-
-    }
 
 }

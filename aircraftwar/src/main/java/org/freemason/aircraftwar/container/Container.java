@@ -1,14 +1,12 @@
 package org.freemason.aircraftwar.container;
 
-import org.freemason.aircraftwar.model.bullet.EnemyBullet;
-import org.freemason.aircraftwar.model.bullet.FighterBullet;
-import org.freemason.aircraftwar.model.element.Element;
+import org.freemason.aircraftwar.model.weapon.bullet.EnemyBullet;
+import org.freemason.aircraftwar.model.weapon.bullet.FighterBullet;
 import org.freemason.aircraftwar.model.plane.Enemy;
 import org.freemason.aircraftwar.model.plane.Fighter;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Container extends JPanel{
@@ -34,7 +32,6 @@ public class Container extends JPanel{
     }
     public void dropEnemy(Enemy e){
         enemys.remove(e);
-        e.dead();
     }
 
 

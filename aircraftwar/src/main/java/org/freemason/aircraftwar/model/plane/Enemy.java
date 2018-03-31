@@ -1,6 +1,6 @@
 package org.freemason.aircraftwar.model.plane;
 
-import org.freemason.aircraftwar.model.bullet.Bullet;
+import org.freemason.aircraftwar.model.weapon.bullet.Bullet;
 
 import java.awt.image.BufferedImage;
 
@@ -9,13 +9,27 @@ public class Enemy extends Plane{
         super(X, Y, image, health,10);
     }
 
-    Bullet fire() {
+    @Override
+    public void shot(Bullet bullet) {
+
+    }
+    @Override
+    public Bullet fire() {
         return null;
     }
 
-    public void dead() {
+    @Override
+    public void destroy() {
 
     }
 
+    @Override
+    public void outOfBounds() {
 
+    }
+
+    @Override
+    protected void join() {
+        container.addEnemy(this);
+    }
 }

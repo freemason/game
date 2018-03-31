@@ -5,8 +5,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class FighterParamUtils {
-    private static Properties fighterParam = new Properties();;
-    private static final String DEFAULT_FIGHTER_PARAM = "fighterparams.json";
+    private static Properties fighterParam = new Properties();
+    private static final String DEFAULT_FIGHTER_PARAM = "config/fighterparams.json";
 
     static {
         InputStream inputStream = null;

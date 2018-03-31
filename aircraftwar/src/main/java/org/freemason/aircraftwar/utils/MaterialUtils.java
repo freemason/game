@@ -14,7 +14,7 @@ public class MaterialUtils {
     private static BufferedImage backgroundImage;
     private static final String DEFAULT_PLANE_MATERIAL_PATH = "material/fighter";
     private static final String DEFAULT_BULLET_MATERIAL_PATH = "material/bullet/bullet.png";
-    private static final String DEFAULT_BACKGROUND_MATERIAL_PATH = "material/bullet/background.png";
+    private static final String DEFAULT_BACKGROUND_MATERIAL_PATH = "material/background/background.png";
 
     static {
         URL url = MaterialUtils.class.getClassLoader().getResource(DEFAULT_PLANE_MATERIAL_PATH);
