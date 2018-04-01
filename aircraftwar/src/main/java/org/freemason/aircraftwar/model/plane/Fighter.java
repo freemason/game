@@ -28,9 +28,10 @@ public class Fighter extends Plane{
         }
         return null;
     }
-    @Override
-    public void outOfBounds() {
 
+    @Override
+    protected void outOfBounds() {
+        throw new UnsupportedOperationException("fighter does not support out of bounds");
     }
 
     @Override
@@ -58,7 +59,54 @@ public class Fighter extends Plane{
          * ↓→       5644
          */
         /*if (getX() <= 0 && (direction == 65 || direction == 5655 || direction ==) )*/
-
+        //贴近左边界
+        if (getX() <= 0){
+            if (direction == 65){
+                return;
+            }
+            if (direction == 5655){
+                direction = 87;
+            }
+            if (direction == 5395){
+                direction = 83;
+            }
+        }
+        //贴近右边界
+        if (getX() + getWidth() >= container.getWidth()){
+            if (direction == 68){
+                return;
+            }
+            if (direction == 5916){
+                direction = 87;
+            }
+            if (direction == 5644){
+                direction = 83;
+            }
+        }
+        //下边界
+        if (getY() + getHeight() > container.getHeight()){
+            if (direction == 83){
+                return;
+            }
+            if (direction == 5395){
+                direction = 65;
+            }
+            if (direction == 5644){
+                direction = 68;
+            }
+        }
+        //上边界
+        if(getY() <= 0){
+            if (direction == 87){
+                return;
+            }
+            if (direction == 5655){
+                direction = 65;
+            }
+            if (direction == 5916){
+                direction = 68;
+            }
+        }
         super.move(direction);
     }
 }

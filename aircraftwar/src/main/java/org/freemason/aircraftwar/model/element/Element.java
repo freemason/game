@@ -30,7 +30,7 @@ public abstract class Element {
     protected JPanelElementContainer container = ContextHolder.getBean(JPanelElementContainer.class);
 
     //越界
-    public abstract void outOfBounds();
+    protected abstract void outOfBounds();
 
     //加入容器
     protected abstract void join();
