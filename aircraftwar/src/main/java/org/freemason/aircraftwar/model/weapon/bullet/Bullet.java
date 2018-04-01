@@ -39,7 +39,7 @@ public abstract class Bullet extends Element implements Moveable {
 
     @Override
     public final void move(int dir){
-
+        //bullet has only two directions, ignore direction parameter!
         if (direction){
             setY(getY() + speed);
         }else {
@@ -49,7 +49,6 @@ public abstract class Bullet extends Element implements Moveable {
             outOfBounds();
             destroy();
         }
-        //bullet has only two directions, ignore direction parameter!
     }
 
     //子弹击中飞机
@@ -66,6 +65,5 @@ public abstract class Bullet extends Element implements Moveable {
             return getY() + getHeight() < 0;
         }
     }
-
 
 }

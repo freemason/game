@@ -37,13 +37,21 @@ public class JPanelElementContainer extends JPanel implements ElementContainer {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                while (true){
+                for (;;){
                     if (bullets.isEmpty()){
                         continue;
                     }
                     for (FighterBullet fighterBullet : bullets){
                         fighterBullet.move(0);
                     }
+                }
+            }
+        });
+
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (;;){
                     repaint();
                     try {
                         Thread.sleep(2);
@@ -53,6 +61,7 @@ public class JPanelElementContainer extends JPanel implements ElementContainer {
                 }
             }
         });
+
     }
 
     private List<Enemy> enemys = new CopyOnWriteArrayList<>();

@@ -77,7 +77,7 @@ public class WASDListener extends KeyAdapter {
         while (fighterDirection > 0) {
             flying.set(true);
             f.move(fighterDirection);
-            jPanelElementContainer.repaint();
+           // jPanelElementContainer.repaint();
             try {
                 Thread.sleep(4);
             } catch (InterruptedException e) {
