@@ -48,11 +48,18 @@ public abstract class Bullet extends Element implements Moveable {
         }
     }
 
-    //子弹击中飞机
+
+    /**
+     * 子弹击中飞机
+     * @param plane 被击中的飞机
+     */
     public void hit(Plane plane){
         //碰撞判断
-        plane.shot(this);
-        destroy();
+        if((getY() + getHeight() > plane.getY() && getY() < plane.getY() + plane.getHeight() ) &&   //纵向
+            getX() + getWidth()  > plane.getX() && getX() < plane.getX() + plane.getWidth() ){      //横向
+            plane.shot(this);
+            destroy();
+        }
     }
 
     private boolean checkOutOfBounds(){

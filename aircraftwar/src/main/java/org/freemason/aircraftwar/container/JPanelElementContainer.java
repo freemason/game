@@ -1,10 +1,9 @@
 package org.freemason.aircraftwar.container;
 
 import org.freemason.aircraftwar.ContextHolder;
-import org.freemason.aircraftwar.model.weapon.bullet.Bullet;
 import org.freemason.aircraftwar.model.weapon.bullet.EnemyBullet;
 import org.freemason.aircraftwar.model.weapon.bullet.FighterBullet;
-import org.freemason.aircraftwar.model.plane.Enemy;
+import org.freemason.aircraftwar.model.plane.enemy.Enemy;
 import org.freemason.aircraftwar.model.plane.Fighter;
 import org.freemason.aircraftwar.utils.MaterialUtils;
 

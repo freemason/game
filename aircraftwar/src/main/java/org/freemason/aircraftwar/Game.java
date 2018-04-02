@@ -35,10 +35,8 @@ public class Game {
         Fighter fighter = new Fighter(305,400,"F22",200,1);
         FighterWeapon fighterWeapon1 = new FighterWeapon(10,500,fighter, FighterWeapon.MountPosition.leftWing);
         FighterWeapon fighterWeapon2 = new FighterWeapon(10,500,fighter, FighterWeapon.MountPosition.rightWing);
-
         FighterWeapon fighterWeapon3 = new FighterWeapon(10,500,fighter, FighterWeapon.MountPosition.leftTip);
         FighterWeapon fighterWeapon4 = new FighterWeapon(10,500,fighter, FighterWeapon.MountPosition.rightTip);
-
         fighter.setWeapon(fighterWeapon1,fighterWeapon2,fighterWeapon3,fighterWeapon4);
         ContextHolder.registBean(fighter);
         return fighter;
@@ -47,7 +45,6 @@ public class Game {
 
     public static void main(String[] args) throws IOException {
         PropertiesUtil.load();
-
         //新建一个java框框
         JFrame frame = new JFrame("百分点打飞机");
 
@@ -56,7 +53,7 @@ public class Game {
         JPanelElementContainer jPanelElementContainer = new JPanelElementContainer();
         ContextHolder.registBean(jPanelElementContainer);
         jPanelElementContainer.setFighter(initFighter());
-       frame.add(jPanelElementContainer); // 将面板添加到JFrame中
+        frame.add(jPanelElementContainer); // 将面板添加到JFrame中
         frame.setSize(backgroundImage.getWidth() + 15, backgroundImage.getHeight() + 39); // 设置大小
         //frame.setAlwaysOnTop(true); // 设置其总在最上
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 默认关闭操作
@@ -66,25 +63,6 @@ public class Game {
         //frame.addKeyListener(new WASDListener());
         frame.addKeyListener(new WASDListener());
         frame.addKeyListener(new FireListener());
-    }
-
-
-    static class DrawTask implements Runnable{
-        private Graphics g;
-        private BufferedImage image;
-        private int X;
-        private int Y;
-
-        public DrawTask(Graphics g, BufferedImage image, int x, int y) {
-            this.g = g;
-            this.image = image;
-            X = x;
-            Y = y;
-        }
-
-        public void run() {
-            g.drawImage(image,X,Y,null);
-        }
     }
 
 }

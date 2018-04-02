@@ -23,7 +23,7 @@ public class FighterWeapon extends Weapon{
             case leftWing:
                 return new int[]{plane.getX() + plane.getWidth()/4 - bulletImage.getWidth()/2, plane.getY() + plane.getHeight()*3/4};
             case rightWing:
-                return new int[]{plane.getX() + plane.getWidth()*3/4 , plane.getY() + plane.getHeight()*3/4};
+                return new int[]{plane.getX() + plane.getWidth()*3/4 -4 , plane.getY() + plane.getHeight()*3/4};
             case rightTip:
                 return new int[]{plane.getX() + plane.getWidth() - bulletImage.getWidth(), plane.getY() + plane.getHeight()*3/4};
             default:

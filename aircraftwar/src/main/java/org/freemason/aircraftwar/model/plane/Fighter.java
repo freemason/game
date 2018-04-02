@@ -43,22 +43,13 @@ public class Fighter extends Plane{
 
     }
 
+    /**
+     * 战机不能越界
+     * {@link Plane#move}
+     * @param direction 飞行方向
+     */
     @Override
     public void move(int direction) {
-        /*if (getX() <= 0 || getX() + getWidth() >= container.getWidth() || getY() <=0 || getY() + getWidth() >= container.getHeight()){
-            return;
-        }*/
-        /* d→    a←   w↑   s↓
-         * ↑        87
-         * ←        65
-         * ↓        83
-         * →        68
-         * ←↑       5655
-         * ↑→       5916
-         * ←↓       5395
-         * ↓→       5644
-         */
-        /*if (getX() <= 0 && (direction == 65 || direction == 5655 || direction ==) )*/
         //贴近左边界
         if (getX() <= 0){
             if (direction == 65){
@@ -109,4 +100,15 @@ public class Fighter extends Plane{
         }
         super.move(direction);
     }
+
+    /**
+     * @param direction 指令方向值
+     * @return  修改后的方向值
+     */
+    private int directionControl(int direction){
+        int d = 0;
+        return d;   //待实现
+    }
+
+
 }

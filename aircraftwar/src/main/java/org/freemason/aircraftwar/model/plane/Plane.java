@@ -77,39 +77,48 @@ public abstract class Plane extends Element implements Moveable{
 
     public abstract Bullet fire();
 
-    //移动方法
+    /**
+     * 飞机移动步长均为1px 以调用频率实现速度
+     * @param direction 飞行方向
+     * d→    a←   w↑   s↓
+     * ↑        87
+     * ←        65
+     * ↓        83
+     * →        68
+     * ←↑       5655
+     * ↑→       5916
+     * ←↓       5395
+     * ↓→       5644
+     */
     public void move(int direction){
-        /*斜向飞行的速度问题   像素大小递增减只能是整数  。。。。。
-        double angle = Math.sin(Math.PI/4);
-        System.out.println(angle);*/
         switch (direction){
             case 87:
-                setY(getY() - currentSpeed);
+                setY(getY() - 1);
                 break;
             case 83:
-                setY(getY() + currentSpeed);
+                setY(getY() + 1);
                 break;
             case 65:
-                setX(getX() - currentSpeed);
+                setX(getX() - 1);
                 break;
             case 68:
-                setX(getX() + currentSpeed);
+                setX(getX() + 1);
                 break;
             case 5655:
-                setY(getY() - currentSpeed);
-                setX(getX() - currentSpeed);
+                setY(getY() - 1);
+                setX(getX() - 1);
                 break;
             case 5916:
-                setY(getY() - currentSpeed);
-                setX(getX() + currentSpeed);
+                setY(getY() - 1);
+                setX(getX() + 1);
                 break;
             case 5395:
-                setY(getY() + currentSpeed);
-                setX(getX() - currentSpeed);
+                setY(getY() + 1);
+                setX(getX() - 1);
                 break;
             case 5644:
-                setY(getY() + currentSpeed);
-                setX(getX() + currentSpeed);
+                setY(getY() + 1);
+                setX(getX() + 1);
                 break;
             default:
                 break;

@@ -2,7 +2,7 @@ package org.freemason.aircraftwar.container;
 
 import org.freemason.aircraftwar.model.weapon.bullet.EnemyBullet;
 import org.freemason.aircraftwar.model.weapon.bullet.FighterBullet;
-import org.freemason.aircraftwar.model.plane.Enemy;
+import org.freemason.aircraftwar.model.plane.enemy.Enemy;
 
 public interface ElementContainer {
 

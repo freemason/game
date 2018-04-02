@@ -1,9 +1,6 @@
 package org.freemason.aircraftwar.model.weapon.factory;
 
-import org.freemason.aircraftwar.model.plane.Enemy;
 import org.freemason.aircraftwar.model.weapon.bullet.Bullet;
-import org.freemason.aircraftwar.model.weapon.bullet.EnemyBullet;
-import org.freemason.aircraftwar.model.weapon.bullet.FighterBullet;
 
 public interface BulletFactory {
 
