@@ -12,11 +12,11 @@ public class Enemy extends Plane {
     }
 
     @Override
-    public void shot(Bullet bullet) {
-        FighterBullet fighterBullet = (FighterBullet)bullet;
-        //碰撞逻辑
-
-        bullet.hit(this);
+    protected void shot(Bullet bullet) {
+        if (bullet instanceof FighterBullet){
+            FighterBullet fighterBullet = (FighterBullet)bullet;
+            fighterBullet.hit(this);
+        }
     }
     @Override
     public Bullet fire() {
@@ -42,22 +42,27 @@ public class Enemy extends Plane {
 
 
     public enum EnemyLevel{
-        kindergarten(1,2),
-        preschool(1,1),
-        primary(1,1),
-        junior(1,2),
-        senior (1,1),
-        bachelor(1,2),
-        master(1,1),
-        doctor(1,2);
+        kindergarten(10,1,2),
+        preschool(10,1,2),
+        primary(10,1,2),
+        junior(10,1,2),
+        senior(10,1,2),
+        bachelor(10,1,2),
+        master(10,1,2),
+        doctor(10,1,2);
 
-        EnemyLevel(int damage, int speed){
+        EnemyLevel(int health, int damage, int speed){
+            this.health = health;
             this.damage = damage;
             this.speed = speed;
         }
-        private int id;
+        private int health;
         private int damage;
         private int speed;
+
+        public int getHealth() {
+            return health;
+        }
 
         public int getDamage() {
             return damage;

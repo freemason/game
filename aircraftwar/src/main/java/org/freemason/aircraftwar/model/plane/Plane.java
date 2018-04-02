@@ -68,7 +68,7 @@ public abstract class Plane extends Element implements Moveable{
     }
     //throw  new UnsupportedOperationException("fighter can't escape from the container!");
 
-    public abstract void shot(Bullet bullet);/*{
+    protected abstract void shot(Bullet bullet);/*{
         this.currentHealth -= bullet.getDamage();
         if(this.currentHealth <= 0){
             destroy();

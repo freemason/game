@@ -1,7 +1,9 @@
 package org.freemason.aircraftwar.model.plane;
 
+import org.freemason.aircraftwar.model.plane.enemy.Enemy;
 import org.freemason.aircraftwar.model.weapon.Weapon;
 import org.freemason.aircraftwar.model.weapon.bullet.Bullet;
+import org.freemason.aircraftwar.model.weapon.bullet.EnemyBullet;
 import org.freemason.aircraftwar.utils.MaterialUtils;
 
 public class Fighter extends Plane{
@@ -15,10 +17,13 @@ public class Fighter extends Plane{
     }
 
     @Override
-    public void shot(Bullet bullet) {
-        setCurrentHealth(getCurrentHealth() - bullet.getDamage());
-        if(getCurrentHealth() <= 0){
-            destroy();
+    protected void shot(Bullet bullet) {
+        if (bullet instanceof EnemyBullet){
+            EnemyBullet enemyBullet = (EnemyBullet)bullet;
+            setCurrentHealth(getCurrentHealth() - bullet.getDamage());
+            if(getCurrentHealth() <= 0){
+                destroy();
+            }
         }
     }
     @Override
@@ -40,7 +45,7 @@ public class Fighter extends Plane{
 
     @Override
     public void destroy() {
-
+        System.out.println("游戏结束");
     }
 
     /**

@@ -16,7 +16,7 @@ public class FighterWeapon extends Weapon{
         this.position = position;
     }
 
-    private int[] locate(){
+    protected int[] locate(){
         switch (position){
             case leftTip:
                 return new int[]{plane.getX(),plane.getY() + plane.getHeight()*3/4};
@@ -43,10 +43,4 @@ public class FighterWeapon extends Weapon{
         return MultiBulletFactory.produceFighterBullet(xy[0], xy[1], getDamage());
     }
 
-    public enum MountPosition{
-        leftTip,
-        leftWing,
-        rightWing,
-        rightTip
-    }
 }
