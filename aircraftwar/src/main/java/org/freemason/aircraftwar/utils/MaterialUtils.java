@@ -12,13 +12,15 @@ public class MaterialUtils {
     private static Map<String, BufferedImage> airplaneImages = new HashMap<String, BufferedImage>();
     private static BufferedImage bulletImage;
     private static BufferedImage backgroundImage;
-    private static final String DEFAULT_PLANE_MATERIAL_PATH = "material/fighter";
-    private static final String DEFAULT_BULLET_MATERIAL_PATH = "material/bullet/bullet.png";
-    private static final String DEFAULT_BACKGROUND_MATERIAL_PATH = "material/background/background.png";
+    private static final String DEFAULT_PLANE_MATERIAL_PATH = "/material/fighter";
+    private static final String DEFAULT_BULLET_MATERIAL_PATH = "/material/bullet/bullet.png";
+    private static final String DEFAULT_BACKGROUND_MATERIAL_PATH = "/material/background/background.png";
 
     static {
-        URL url = MaterialUtils.class.getClassLoader().getResource(DEFAULT_PLANE_MATERIAL_PATH);
+        URL url = MaterialUtils.class.getResource(DEFAULT_PLANE_MATERIAL_PATH);
+
         File[] files = new File(url.getFile()).listFiles();
+
         for (File file : files) {
             try {
                 String fileName = file.getName();
@@ -29,7 +31,7 @@ public class MaterialUtils {
             }
         }
 
-        url = MaterialUtils.class.getClassLoader().getResource(DEFAULT_BULLET_MATERIAL_PATH);
+        url = MaterialUtils.class.getResource(DEFAULT_BULLET_MATERIAL_PATH);
         try {
             bulletImage = ImageIO.read(url);
         } catch (IOException e) {
@@ -37,7 +39,7 @@ public class MaterialUtils {
         }
 
 
-        url = MaterialUtils.class.getClassLoader().getResource(DEFAULT_BACKGROUND_MATERIAL_PATH);
+        url = MaterialUtils.class.getResource(DEFAULT_BACKGROUND_MATERIAL_PATH);
         try {
             backgroundImage = ImageIO.read(url);
         } catch (IOException e) {

@@ -33,10 +33,19 @@ public class JPanelElementContainer extends JPanel implements ElementContainer {
         this.fighter = fighter;
     }
 
-    public JPanelElementContainer() {
+    //重绘画面    更新容器内所有元素（未越界的）图像的位置
+    private void repaintAll(){
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                for (;;){
+                    repaint();
+                }
+            }
+        });
+    }
+    private void fighterBulletMove(){
+        executorService.execute(()->{
                 for (;;){
                     if (bullets.isEmpty()){
                         continue;
@@ -44,24 +53,17 @@ public class JPanelElementContainer extends JPanel implements ElementContainer {
                     for (FighterBullet fighterBullet : bullets){
                         fighterBullet.move(0);
                     }
-                }
-            }
-        });
-
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                for (;;){
-                    repaint();
                     try {
                         Thread.sleep(2);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-            }
         });
-
+    }
+    public JPanelElementContainer() {
+        repaintAll();
+        fighterBulletMove();
     }
 
     private List<Enemy> enemys = new CopyOnWriteArrayList<>();
@@ -89,6 +91,12 @@ public class JPanelElementContainer extends JPanel implements ElementContainer {
         }
 
     }
+
+
+
+
+
+
 
     @Override
     public int getHeight() {

@@ -14,32 +14,31 @@ public class FireListener extends KeyAdapter{
     private Fighter f = ContextHolder.getBean(Fighter.class);
     private ExecutorService executorService = ContextHolder.getBean(ExecutorService.class);
     private JPanelElementContainer jPanelElementContainer = ContextHolder.getBean(JPanelElementContainer.class);
-    private volatile boolean fireDown = false;
     private static AtomicBoolean firing = new AtomicBoolean(false);
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if(keyCode != 74){
             return;
         }
-        fireDown = true;
 
         if (firing.get()){
             return;
         }
 
+        firing.set(true);
+
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                while (fireDown){
-                    firing.set(true);
+                while (firing.get()){
                     f.fire();
+                   // jPanelElementContainer.repaint();
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                firing.set(false);
             }
         });
     }
@@ -51,7 +50,8 @@ public class FireListener extends KeyAdapter{
         if(keyCode != 74){
             return;
         }
-        fireDown = false;
+
+        firing.set(false);
         /*fireDown = false;
         if (firing.get()){
             return;

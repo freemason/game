@@ -12,8 +12,7 @@ public abstract class Bullet extends Element implements Moveable {
 
     //子弹伤害值
     private final int damage;
-    //飞行速度
-    private final int speed;
+
     //飞行方向
     private final boolean direction;
 
@@ -26,10 +25,9 @@ public abstract class Bullet extends Element implements Moveable {
     }
 
     //子弹 方向为true 向下飞 即为敌机子弹  反之为座机子弹
-    protected Bullet(int X, int Y, int damage, int speed, boolean direction) {
+    protected Bullet(int X, int Y, int damage, boolean direction) {
         super(X, Y, MaterialUtils.getBulletImage());
         this.damage = damage;
-        this.speed = speed;
         this.direction = direction;
     }
 
@@ -41,13 +39,12 @@ public abstract class Bullet extends Element implements Moveable {
     public final void move(int dir){
         //bullet has only two directions, ignore direction parameter!
         if (direction){
-            setY(getY() + speed);
+            setY(getY() + 1);
         }else {
-            setY(getY() - speed);
+            setY(getY() - 1);
         }
         if (checkOutOfBounds()){
             outOfBounds();
-            destroy();
         }
     }
 
